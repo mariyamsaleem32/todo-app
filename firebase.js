@@ -1,18 +1,21 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 
-import {  getAuth,createUserWithEmailAndPassword,
-} from  'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+// import {  getAuth,createUserWithEmailAndPassword,
+// } from  'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
 
 import { getFirestore,
   collection,
   addDoc,
-  getDocs,
-  doc,
-  updateDoc,
-  serverTimestamp ,
-   arrayUnion, 
-   arrayRemove,
-   deleteDoc} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
+  onSnapshot,
+  deleteDoc,
+//   getDocs,
+//   doc,
+//   updateDoc,
+//   serverTimestamp ,
+//    arrayUnion, 
+//    arrayRemove,
+//    deleteDoc
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
 
    const firebaseConfig = {
     apiKey: "AIzaSyDxpJS79rw1ywSr3v_jS-SRM-gipnVz8B0",
@@ -24,13 +27,15 @@ import { getFirestore,
   };
   
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+//   const auth = getAuth(app);
   const db = getFirestore(app);
 
-export { auth,
-  createUserWithEmailAndPassword,
-  getFirestore,db,
-  collection, addDoc,
-  getDocs, doc,
-  updateDoc,serverTimestamp , arrayUnion,
-  arrayRemove,deleteDoc}
+export { 
+//   auth,
+//   createUserWithEmailAndPassword,
+//   getDocs, doc,
+//   updateDoc,serverTimestamp , arrayUnion,
+//   arrayRemove,deleteDoc
+getFirestore,db,
+collection, addDoc,
+onSnapshot,deleteDoc, }
