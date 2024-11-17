@@ -1,22 +1,21 @@
-import { db, collection, addDoc, onSnapshot, deleteDoc, doc} from "./firebase.js"; // Import doc here
+import { db, collection, addDoc, onSnapshot, deleteDoc, doc} from "./firebase.js";
 
 const list = document.getElementById('todo-list');
 const add = async () => {
   const todo = document.getElementById('todo-input');
   
-  if (todo.value.trim() === "") {  // Validate if the input is not empty
+  if (todo.value.trim() === "") {
     alert("Please enter a todo!");
     return;
   }
 
   let ref = collection(db, "todos");
-
   try {
     await addDoc(ref, {
       todo: todo.value
     });
     console.log("todo added");
-    todo.value = ""; // Clear the input
+    todo.value = ""; 
   } catch (error) {
     console.error("Error adding todo: ", error);
   }
@@ -27,17 +26,9 @@ addTodo.addEventListener("click", add);
 
 let getTodos = () => {
   onSnapshot(collection(db, "todos"), (snapshot) => {
-    list.innerHTML = ""; // Clear the list before rendering
+    list.innerHTML = ""; 
     snapshot.docChanges().forEach((change) => {
       console.log("change", change.type);
-      // handle different types of changes (added, modified, removed)
-      if (change.type === "added") {
-        console.log("New todo added: ", change.doc.data());
-      } else if (change.type === "modified") {
-        console.log("Todo modified: ", change.doc.data());
-      } else if (change.type === "removed") {
-        console.log("Todo removed: ", change.doc.data());
-      }
     });
 
     snapshot.forEach((doc) => {
@@ -52,7 +43,7 @@ let getTodos = () => {
 
 const deleteTodo = async (id) => {
   try {
-    await deleteDoc(doc(db, "todos", id)); // Correct doc reference
+    await deleteDoc(doc(db, "todos", id)); 
     console.log("Todo deleted succesfully");
   } catch (error) {
     console.error("Error deleting todo: ", error);
@@ -61,4 +52,4 @@ const deleteTodo = async (id) => {
 
 getTodos();
 
-window.deleteTodo = deleteTodo; // Expose deleteTodo globally to use in onclick
+window.deleteTodo = deleteTodo; 
