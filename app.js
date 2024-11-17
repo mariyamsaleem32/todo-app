@@ -1,4 +1,6 @@
-import { db, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, } from "./firebase.js";
+import { db, collection, addDoc, onSnapshot,
+         deleteDoc, doc, updateDoc, serverTimestamp, increment,
+         query, where, } from "./firebase.js";
 
 const list = document.getElementById('todo-list');
 const add = async () => {
@@ -12,13 +14,14 @@ const add = async () => {
   let ref = collection(db, "todos");
   try {
     await addDoc(ref, {
+      id: increment(1),
       todo: todo.value,
       timestamp: serverTimestamp()
     });
     console.log("todo added");
     todo.value = ""; 
   } catch (error) {
-    console.error("Error adding todo: ", error);
+    console.error("Error adding todo: ", error);x 
   }
 };
 
@@ -26,15 +29,15 @@ const addTodo = document.getElementById("add-button");
 addTodo.addEventListener("click", add);
 
 let getTodos = () => {
-  onSnapshot(collection(db, "todos"), (snapshot) => {
+   let q = query(collection(db, "todos"), where("id", "==", 2));
+  onSnapshot(q, (snapshot) => {
     list.innerHTML = ""; 
-    snapshot.docChanges().forEach((change) => {
-      console.log("change", change.type);
-    });
-
+   //  snapshot.docChanges().forEach((change) => {
+   //    console.log("change", change.type);
+   //  });
     snapshot.forEach((doc) => {
       let {todo,timestamp} = doc.data();
-      console.log("timestamp",new Date(timestamp.toDate()));
+      // console.log("timestamp",new Date(timestamp.toDate()));
       
       list.innerHTML += 
       `<li>
