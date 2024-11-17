@@ -6,6 +6,7 @@ addDoc,
 onSnapshot,
 deleteDoc,
 doc,
+updateDoc ,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"
 
    const firebaseConfig = {
@@ -20,4 +21,4 @@ doc,
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-export{ db, collection, addDoc, onSnapshot, deleteDoc, doc}
+export{ db, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, }
