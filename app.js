@@ -33,7 +33,9 @@ let getTodos = () => {
     });
 
     snapshot.forEach((doc) => {
-      let { todo } = doc.data();
+      let {todo,timestamp} = doc.data();
+      console.log("timestamp",new Date(timestamp.toDate()));
+      
       list.innerHTML += 
       `<li>
          ${todo}
