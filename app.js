@@ -1,4 +1,4 @@
-import { db, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, } from "./firebase.js";
+import { db, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, } from "./firebase.js";
 
 const list = document.getElementById('todo-list');
 const add = async () => {
@@ -12,7 +12,8 @@ const add = async () => {
   let ref = collection(db, "todos");
   try {
     await addDoc(ref, {
-      todo: todo.value
+      todo: todo.value,
+      timestamp: serverTimestamp()
     });
     console.log("todo added");
     todo.value = ""; 
